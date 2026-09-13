@@ -30,7 +30,8 @@ cp config/.env.example /home/bear/discord-bot/.env
 sudo cp systemd/discordconnect-bot.service /etc/systemd/system/
 chown -R bear:bear /home/bear/discord-bot
 cd /home/bear/discord-bot
-sudo apt install python3.12-venv
+sudo apt update
+sudo apt install python3-venv
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 nano .env
