@@ -1,0 +1,11 @@
+bin/
+obj/
+.vs/
+.valheim-references/
+BepInEx/config/
+.env
+.env.*
+!.env.example
+valheim.discordconnect.cfg
+!install/config/
+!install/config/*.cfg

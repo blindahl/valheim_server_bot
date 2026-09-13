@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <AssemblyName>BepInExDiscordConnect</AssemblyName>
+    <RootNamespace>BepInExDiscordConnect</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <ValheimPath Condition="'$(ValheimPath)' == ''">/path/to/valheim</ValheimPath>
+    <BepInExPath Condition="'$(BepInExPath)' == ''">$(ValheimPath)/BepInEx</BepInExPath>
+    <HasValheimDependencies Condition="Exists('$(ValheimPath)/valheim_server_Data/Managed/assembly_valheim.dll') and Exists('$(ValheimPath)/valheim_server_Data/Managed/UnityEngine.dll') and Exists('$(BepInExPath)/core/BepInEx.dll') and Exists('$(BepInExPath)/core/0Harmony.dll')">true</HasValheimDependencies>
+    <HasValheimDependencies Condition="'$(HasValheimDependencies)' == ''">false</HasValheimDependencies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(HasValheimDependencies)' == 'true'">
+    <Compile Include="Plugin.cs" />
+    <Compile Include="DiscordMessageFormatter.cs" />
+    <Reference Include="BepInEx">
+      <HintPath>$(BepInExPath)/core/BepInEx.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(BepInExPath)/core/0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(ValheimPath)/valheim_server_Data/Managed/UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(ValheimPath)/valheim_server_Data/Managed/UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="assembly_valheim">
+      <HintPath>$(ValheimPath)/valheim_server_Data/Managed/assembly_valheim.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(HasValheimDependencies)' != 'true'">
+    <Compile Include="Plugin.cs" />
+    <Compile Include="DiscordMessageFormatter.cs" />
+    <Compile Include="Stubs/**/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+</Project>
