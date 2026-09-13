@@ -1,0 +1,16 @@
+[Unit]
+Description=Valheim Discord command bot
+After=network-online.target valheim.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=bear
+WorkingDirectory=/home/bear/discord-bot
+EnvironmentFile=/home/bear/discord-bot/.env
+ExecStart=/home/bear/discord-bot/.venv/bin/python /home/bear/discord-bot/discord_bot.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
