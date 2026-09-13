@@ -24,11 +24,11 @@ Copy this `install` folder to the server, change into it, and run:
 
 ```bash
 cd /path/to/install
-sudo mkdir -p /home/bear/discord-bot
-sudo cp app/* /home/bear/discord-bot/
-sudo cp config/.env.example /home/bear/discord-bot/.env
+mkdir -p /home/bear/discord-bot
+cp app/* /home/bear/discord-bot/
+cp config/.env.example /home/bear/discord-bot/.env
 sudo cp systemd/discordconnect-bot.service /etc/systemd/system/
-sudo chown -R bear:bear /home/bear/discord-bot
+chown -R bear:bear /home/bear/discord-bot
 cd /home/bear/discord-bot
 sudo apt install python3.12-venv
 python3 -m venv .venv
